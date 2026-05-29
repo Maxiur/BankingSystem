@@ -4,17 +4,14 @@
 
 class User {
 public:
-    User(std::string id, std::string pass_hash)
-        : clientId(std::move(id)), password_hash(std::move(pass_hash)) {}
+    User(std::string id, std::string name)
+        : clientId(std::move(id)), name(std::move(name)) {}
 
     [[nodiscard]] std::string getClientId() const {
         return clientId;
     }
 
-    // Porównanie z klasy Crypto
-    bool checkPassword(std::string password) const;
-
 private:
     std::string clientId;
-    std::string password_hash;
+    std::string name;
 };
