@@ -5,7 +5,8 @@
 class Konto {
 public:
     // Konstruktor
-    Konto(std::string accountNumber, std::string clientId, std::string pin_hash, std::string password_hash, double balance);
+    Konto(std::string accountNumber, std::string clientId, std::string pin_hash,
+          std::string password_hash, double balance);
 
     // Konstruktor kopiujący oraz klonowanie zabraniamy.
     Konto(const Konto& konto) = delete;
@@ -20,17 +21,21 @@ public:
     bool deposit(double amount);
 
     // Autoryzacja konkretnego konta
-    bool checkPassword(std::string& password) const;
-    bool checkPin(std::string& pin) const;
+    bool checkPassword(const std::string& password) const;
+    bool checkPin(const std::string& pin) const;
 
     double getBalance() const;
-    std::string getAccountNumber() const { return accountNumber; }
-    std::string getClientId() const { return clientId; }
+    std::string getAccountNumber() const {
+        return accountNumber;
+    }
+    std::string getClientId() const {
+        return clientId;
+    }
 
 private:
     std::string accountNumber;
-    std::string clientId; // Powiązanie z bazą użytkowników
-    std::string pin_hash; // Pin dedykowany dla jednego konta
+    std::string clientId;      // Powiązanie z bazą użytkowników
+    std::string pin_hash;      // Pin dedykowany dla jednego konta
     std::string password_hash; // Hasło dedykowane dla jednego konta
     double balance;
 

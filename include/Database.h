@@ -1,8 +1,8 @@
 #pragma once
-#include <unordered_map>
-#include <string>
-#include <memory>
 #include "Konto.h"
+#include <memory>
+#include <string>
+#include <unordered_map>
 
 class Database {
 public:
@@ -18,5 +18,9 @@ public:
     // Wykonuje UPDATE na jednym konkretnym koncie po udanej transakcji
     static bool updateAccount(const std::shared_ptr<Konto>& account);
 
+    // Tworzy konto i wstawia do bazy danych
     static bool createAccount(const std::shared_ptr<Konto>& account);
+
+private:
+    // static sqlite3* db;
 };
