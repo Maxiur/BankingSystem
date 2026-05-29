@@ -6,7 +6,7 @@
 class Account {
 public:
     // Konstruktor
-    Account(std::string accountNumber, std::string clientId, double balance);
+    Account(std::string accountNumber, std::string clientId, uint64_t balance);
 
     // Konstruktor kopiujący oraz klonowanie zabraniamy.
     Account(const Account& from) = delete;
@@ -17,21 +17,22 @@ public:
     Account& operator=(Account&&) noexcept;
 
     // Operacje użytkownika na koncie
-    bool withdraw(double amount);
-    bool deposit(double amount);
+    bool withdraw(uint64_t amount);
+    bool deposit(uint64_t amount);
 
-    double getBalance() const {
+    // zwraca saldo w groszach
+    [[nodiscard]] uint64_t getBalanceAsGrosze() const {
         return balance;
     }
-    std::string getAccountNumber() const {
+    [[nodiscard]] std::string getAccountNumber() const {
         return accountNumber;
     }
-    std::string getOwner() const {
+    [[nodiscard]] std::string getOwner() const {
         return owner;
     }
 
 private:
     std::string accountNumber;
     std::string owner;
-    std::atomic<double> balance;
+    std::atomic_uint64_t balance;
 };

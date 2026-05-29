@@ -16,7 +16,7 @@ public:
     double getAccountBalance(const std::string& accountNumber) const;
 
     // Tworzy konto i wstawia do bazy danych
-    bool createAccount(const std::string& accNum, const std::string& owner, double balance);
+    bool createAccount(const std::string& accNum, const std::string& owner, uint64_t balance = 0);
 
     // Wypisanie informacji o koncie
     void printAccountInfo(const std::string& accountNumber) const;
