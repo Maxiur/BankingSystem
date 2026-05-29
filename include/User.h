@@ -1,11 +1,15 @@
 #pragma once
 #include <string>
+#include <utility>
 
 class User {
 public:
-    User(std::string id, std::string pass_hash): clientId(id), password_hash(pass_hash) {}
+    User(std::string id, std::string pass_hash)
+        : clientId(std::move(id)), password_hash(std::move(pass_hash)) {}
 
-    std::string getClientId() const { return clientId; }
+    [[nodiscard]] std::string getClientId() const {
+        return clientId;
+    }
 
     // Porównanie z klasy Crypto
     bool checkPassword(std::string password) const;
