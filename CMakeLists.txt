@@ -9,8 +9,6 @@ find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
 
 qt_standard_project_setup()
 
-add_compile_options(-Wall -Wextra -Wpedantic)
-
 include_directories("./include")
 
 file(GLOB_RECURSE SOURCE_FILES "./src/*.cpp")
