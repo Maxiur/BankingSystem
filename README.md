@@ -1,4 +1,4 @@
-t# Mini System Bankowy 
+# Mini System Bankowy 
 
 Aplikacja okienkowa symulująca prosty system bankowy, napisana w C++ z wykorzystaniem frameworka Qt 6. 
 
