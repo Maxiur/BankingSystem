@@ -21,8 +21,9 @@ jobs:
 
     - name: Budowanie projektu
       run: |
-        cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=Gotowa_Paczka
+        cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=./install
         cmake --build build --config Release
+        cmake --install build --config Release
 
     - name: Wdrażanie i zbieranie DLL-ek (Install & Deploy)
       run: cmake --install build --config Release
@@ -31,4 +32,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: BankApp-Windows-Zbudowana-Wersja
-        path: Gotowa_Paczka/
+        path: ./install/
