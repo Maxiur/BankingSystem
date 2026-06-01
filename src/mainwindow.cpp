@@ -9,6 +9,22 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+        // Przyspawanie okna do aktualnego rozmiaru (żeby użytkownik nic nie rozciągał)
+        this->setFixedSize(this->width(), this->height());
+        // Tylko cyfry
+        QRegularExpression rxAcc("^[0-9]+$");
+        ui->accountNumber->setValidator(new QRegularExpressionValidator(rxAcc, this));
+
+        // Tylko litery i spacje
+        QRegularExpression rxOwner("^[a-zA-ZąęćłńóśźżĄĘĆŁŃÓŚŹŻ ]+$");
+        ui->owner->setValidator(new QRegularExpressionValidator(rxOwner, this));
+
+        // Cyfry i opcjonalnie jedna kropka, przecinek
+        QRegularExpression rxMoney("^[0-9]+[.,]?[0-9]{0,2}$");
+        QValidator* moneyValidator = new QRegularExpressionValidator(rxMoney, this);
+        ui->balance->setValidator(moneyValidator);
+        ui->amountInput->setValidator(moneyValidator);
 }
 
 MainWindow::~MainWindow()
@@ -34,33 +50,13 @@ void MainWindow::on_createAccount_clicked()
         return;
     }
 
-    // Walidacja czy number konta ma tylko cyfry
-    static const QRegularExpression accountRegex("^[0-9]+$");
-    if (!accountRegex.match(rawAccountNumber).hasMatch()) {
-        QMessageBox::warning(this, "Błąd", "Numer konta może składać się wyłącznie z cyfr!");
-        return;
-    }
-
-    // Walidacja czy właściciel ma tylko litery + polskie znaki
-    static const QRegularExpression ownerRegex("^[a-zA-ZąęćłńóśźżĄĘĆŁŃÓŚŹŻ ]+$");
-    if (!ownerRegex.match(rawOwner).hasMatch()) {
-        QMessageBox::warning(this, "Błąd", "Właściciel może mieć tylko litery i spacje!");
-        return;
-    }
-
-    if (rawBalance.contains('-')) {
-        QMessageBox::warning(this, "Błąd", "Saldo startowe nie może być ujemne!");
-        return;
-    }
-
     accountNumber = rawAccountNumber.toStdString();
     owner = rawOwner.toStdString();
 
-    QString rawInput = ui->balance->text().trimmed();
     // Zamieniamy przecinki na kropki
-    rawInput.replace(",", ".");
+    rawBalance.replace(",", ".");
 
-    QStringList parts = rawInput.split('.');
+    QStringList parts = rawBalance.split('.');
     uint64_t totalGrosze = 0;
 
     if (parts.size() == 1) {
@@ -118,11 +114,6 @@ void MainWindow::on_depositButton_clicked()
     QString rawAmount = ui->amountInput->text().trimmed();
     if (rawAmount.isEmpty()) {
         QMessageBox::warning(this, "Błąd", "Wpisz kwotę pieniędzy na której chcesz wykonać operację!");
-        return;
-    }
-
-    if (rawAmount.contains('-')) {
-        QMessageBox::warning(this, "Błąd", "Kwota nie może być ujemna!");
         return;
     }
 
