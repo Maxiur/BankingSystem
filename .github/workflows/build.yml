@@ -1,0 +1,34 @@
+name: Zbuduj BankApp
+
+# Skrypt odpala się automatycznie po każdym pushu na główną gałąź
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Pobieranie kodu
+      uses: actions/checkout@v4
+
+    - name: Instalacja Qt 6
+      uses: jurplel/install-qt-action@v3
+      with:
+        version: '6.5.3'
+        arch: 'win64_mingw'
+
+    - name: Budowanie projektu
+      run: |
+        cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=Gotowa_Paczka
+        cmake --build build --config Release
+
+    - name: Wdrażanie i zbieranie DLL-ek (Install & Deploy)
+      run: cmake --install build --config Release
+
+    - name: Gotowy ZIP
+      uses: actions/upload-artifact@v4
+      with:
+        name: BankApp-Windows-Zbudowana-Wersja
+        path: Gotowa_Paczka/
