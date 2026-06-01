@@ -3,37 +3,43 @@ project(BankApp LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/Paczka")
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
 
 qt_standard_project_setup()
 
-qt_add_executable(BankApp
+add_compile_options(-Wall -Wextra -Wpedantic)
+
+include_directories("./include")
+
+file(GLOB_RECURSE SOURCE_FILES "./src/*.cpp")
+file(GLOB_RECURSE HEADER_FILES "./include/*.h" "./include/*.hpp")
+file(GLOB_RECURSE UI_FILES "./ui/*.ui")
+
+qt_add_executable(${PROJECT_NAME}
     WIN32 MACOSX_BUNDLE
-    main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
-    Account.cpp
-    Bank.hpp
-    Bank.cpp
-    Account.hpp
+    ${SOURCE_FILES}
+    ${HEADER_FILES}
+    ${UI_FILES}
 )
 
-target_link_libraries(BankApp
+set_target_properties(${PROJECT_NAME} PROPERTIES AUTOUIC_SEARCH_PATHS "ui")
+
+target_link_libraries(${PROJECT_NAME}
     PRIVATE
-        Qt::Core
-        Qt::Widgets
+        Qt6::Core
+        Qt6::Widgets
 )
 
-install(TARGETS BankApp
+install(TARGETS ${PROJECT_NAME}
     BUNDLE  DESTINATION .
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
 
 qt_generate_deploy_app_script(
-    TARGET BankApp
+    TARGET ${PROJECT_NAME}
     OUTPUT_SCRIPT deploy_script
     NO_UNSUPPORTED_PLATFORM_ERROR
 )

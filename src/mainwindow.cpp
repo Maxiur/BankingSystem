@@ -53,9 +53,6 @@ void MainWindow::on_createAccount_clicked()
         return;
     }
 
-    // sprawdzic czy balance < 0
-    // wypisac do komunikatu kwote depositu/withdraw
-
     accountNumber = rawAccountNumber.toStdString();
     owner = rawOwner.toStdString();
 

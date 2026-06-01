@@ -21,10 +21,6 @@ public:
 private slots:
     void on_createAccount_clicked(); // Utwórz konto
 
-    // void on_depositButton_clicked(); // Wpłać
-    // void on_withdrawButton_clicked(); // Wypłać
-    // void on_accountList_itemSelectionChanged(); // Kliknięcie konta na liście
-
     void on_depositButton_clicked();
 
     void on_withdrawButton_clicked();
