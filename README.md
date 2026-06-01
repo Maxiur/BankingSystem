@@ -1,4 +1,4 @@
-# Mini System Bankowy 
+t# Mini System Bankowy 
 
 Aplikacja okienkowa symulująca prosty system bankowy, napisana w C++ z wykorzystaniem frameworka Qt 6. 
 
@@ -25,7 +25,7 @@ Aplikacja okienkowa symulująca prosty system bankowy, napisana w C++ z wykorzys
 ## Jak uruchomić projekt (Środowisko deweloperskie)
 
 Najprostszy sposób na uruchomienie kodu do weryfikacji:
-1. Klonujemy repozytorium: `git clone https://github.com/Maxiur/BankingSystem`
+1. Klonujemy repozytorium: `git clone https://github.com/Maxiur/BankingSystem.git`
 2. Otwieramy plik `CMakeLists.txt` w **Qt Creator**.
 3. Skompiluj i uruchom (przycisk Run).
 
