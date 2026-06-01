@@ -17,7 +17,7 @@ jobs:
       uses: jurplel/install-qt-action@v3
       with:
         version: '6.5.3'
-        arch: 'win64_mingw'
+        arch: 'win64_msvc2019_64'
 
     - name: Budowanie projektu
       run: |
