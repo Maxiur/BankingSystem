@@ -7,19 +7,6 @@ Aplikacja okienkowa symulująca prosty system bankowy, napisana w C++ z wykorzys
 * **Framework UI:** Qt 6 (Widgets)
 * **System budowania:** CMake
 * **Kompilator:** MinGW 64-bit
-
-## Zrealizowane założenia
-- [x] Tworzenie nowego konta (wymaga podania numeru, danych właściciela i salda startowego).
-- [x] Wpłata i wypłata środków.
-- [x] Wyświetlanie szczegółowych informacji o koncie.
-- [x] Zabezpieczenie przed ujemnym saldem podczas wypłaty (i wpłaty).
-- [x] Blokady wprowadzania błędnych danych (QRegularExpressionValidator).
-- [x] Trzymanie danych w pamięci RAM na czas działania programu.
-- [x] **[Bonus]** Interfejs graficzny w Qt.
-- [x] **[Bonus]** Operacje na walutach realizowane na liczbach całkowitych (`uint64_t` w groszach) dla uniknięcia błędów zmiennoprzecinkowych.
-- [x] **[Bonus]** Operacje atomiczne dla wpłat i wypłat, w celu uniknięcia sytuacji np. wypłacenia podwójnej ilości pieniędzy przez dwa różne procesy
-
-
 ---
 
 ## Automatyzacja (CI/CD — GitHub Actions)
